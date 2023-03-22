@@ -12,7 +12,7 @@ function Post(props) {
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text>
-                    {props.detail}테스트입니다
+                    {props.detail}
                     </Card.Text>
                 </Card.Body>
             </Card>
