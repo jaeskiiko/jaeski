@@ -4,15 +4,14 @@ import './App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './routes/Header.js'
-import MainPage from './routes/MainPage.js';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import PostList from './components/PostList.js';
-import Pagination from './components/Pagination.js';
+import { useState, useEffect } from 'react';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import PostList from './routes/PostList.js';
+import Test from './routes/Test.js'
 
 function App() {
 
-  let [resto, setResto] = useState([]);
+  let [resto, setResto] = useState([]); // db에서 받아온 db data 넣어놓은 state
 
   const selectResto=async()=>{
       const result = await axios.get('/resto')
@@ -21,19 +20,20 @@ function App() {
 
   useEffect(()=>{
     selectResto();
+    // console.log(resto[0].deposit)
   },[])
 
   return (
     <div className="App">
       <Header />
-
-      <PostList resto={resto}/>
-      <Pagination/>
-      
+    
+      {/* <PostList resto={resto}/> */}
+      <Routes>
+        <Route path="/" element={<PostList resto={resto}/>}/>
+        <Route path="/detail/:id" element={<Test resto={resto}/>}/>
+      </Routes>
     </div>
   );
 }
-
-
 
 export default App;
